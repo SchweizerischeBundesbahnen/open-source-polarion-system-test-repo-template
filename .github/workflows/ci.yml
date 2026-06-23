@@ -1,0 +1,99 @@
+---
+name: Build & Release
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+jobs:
+  verify-with-tox:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write  # Required for SonarCloud to comment on PRs and update status
+    steps:
+      - name: 📄 Checkout code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0  # Full history required for SonarCloud analysis
+      - name: Set up Python from .tool-versions
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version-file: .tool-versions
+      - name: 🧱 Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
+        with:
+          enable-cache: true
+      - name: 🧱 Install dependencies
+        run: uv sync --all-groups --frozen
+      - name: 🧪 Run tests
+        run: uv run tox
+      - name: SonarCloud scan for PR
+        uses: sonarsource/sonarqube-scan-action@59db25f34e16620e48ab4bb9e4a5dce155cb5432  # v8
+        if: github.event_name == 'pull_request' && github.event.repository.visibility == 'public'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: |
+            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+      - name: SonarCloud scan for Push
+        uses: sonarsource/sonarqube-scan-action@59db25f34e16620e48ab4bb9e4a5dce155cb5432  # v8
+        if: github.event_name == 'push' && github.event.repository.visibility == 'public'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: |
+            -Dsonar.branch.name=${{ github.ref_name }}
+  release-please:
+    if: github.event_name != 'pull_request' && github.ref_name == 'main'
+    uses: SchweizerischeBundesbahnen/github-workflows-polarion/.github/workflows/reusable-release-please.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      release-type: python
+  build-and-publish:
+    needs: [verify-with-tox, release-please]
+    runs-on: ubuntu-latest
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    permissions:
+#      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing for PyPI
+      contents: write  # Required for uploading artifacts to GitHub release
+    steps:
+      - name: 📄 Checkout code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Set up Python from .tool-versions
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version-file: .tool-versions
+      - name: 🧱 Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
+        with:
+          enable-cache: true
+      - name: 🧱 Install dependencies
+        run: uv sync --frozen
+      - name: 📦 Build the package
+        run: uv build
+      - name: 📦 Publish artifacts to GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.release-please.outputs.tag_name }}
+        run: gh release upload "${RELEASE_TAG}" dist/*.{tar.gz,whl}
+#      - name: 📦 Publish artifacts to PyPI/TestPyPI
+#        env:
+#          name: testpypi
+#          url: https://test.pypi.org/p/python-requirements-inspector
+#          name: pypi
+#          url: https://pypi.org/p/python-requirements-inspector
+#        uses: pypa/gh-action-pypi-publish@release/v1.12.3
+#        with:
+#          repository-url: https://test.pypi.org/legacy/  # it must be removed when publishing to PyPI
+#          verbose: true

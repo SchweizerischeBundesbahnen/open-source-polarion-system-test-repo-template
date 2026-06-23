@@ -1,0 +1,75 @@
+[project]
+name = "open-source-polarion-python-repo-template"
+version = "0.0.0"  # the version is controlled by the pipeline
+description = ""
+authors = [
+    {name = "SBB Polarion Team", email = "polarion-opensource@sbb.ch"},
+]
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+
+dependencies = [
+    "httpx==0.28.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/SchweizerischeBundesbahnen/open-source-polarion-python-repo-template"
+Repository = "https://github.com/SchweizerischeBundesbahnen/open-source-polarion-python-repo-template"
+
+[dependency-groups]
+dev = [
+    "pre-commit==4.6.0",
+    "ruff==0.15.18",
+    "mypy==2.1.0",
+]
+
+test = [
+    "tox==4.55.1",
+    "tox-uv==1.35.2",
+    "pytest==9.1.1",
+    "coverage==7.14.1",
+]
+
+[tool.uv]
+# Set to true because this project is a library, not an application
+package = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 240
+fix = true
+show-fixes = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D",      # pydocstyle — enable when docstring conventions are established
+    "ANN",    # flake8-annotations — mypy handles type checking
+    "COM",    # flake8-commas — formatter handles trailing commas
+    "ISC",    # flake8-implicit-str-concat — conflicts with formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "S101" # No assert rule (bandit)
+]
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.mypy]
+strict = true
+explicit_package_bases = true
+exclude = "tests/.*"
+install_types = true
+non_interactive = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
