@@ -2,11 +2,8 @@
 name: System Tests (Polarion in Docker)
 # Integration tests for pull requests: spin up Polarion in Docker (via the testcontainers
 # harness in tests/run.py) and run the system tests against pinned extension versions
-# (see env below). This is the merge gate, so PRs do not depend on the availability of the
-# long-lived Polarion SUT (which Jenkins exercises nightly instead).
-#
-# TEMPLATE: pin the versions/images for your extension below. TC_EXTENSION_VERSION is the
-# version of the extension under test that gets installed into the container.
+# (see env below). This is the merge gate, so PRs do not depend on the availability of a
+# persistent Polarion instance (which Jenkins exercises nightly instead).
 on:
   pull_request:
     branches: [main]
@@ -20,17 +17,12 @@ concurrency:
 env:
   JAVA_VERSION: '21'
   JAVA_DISTRIBUTION: temurin
-  # TEMPLATE: the worked example has no dedicated extension under test, so TC_EXTENSION_VERSION
-  # matches TC_TEST_DATA_VERSION (EXTENSION_NAME is "test-data"). Set these to the versions for
-  # the extension under test and its companions. Keep TC_EXTENSION_VERSION == TC_TEST_DATA_VERSION
-  # only while EXTENSION_NAME stays "test-data" (otherwise two test-data jars would clash).
+  # TEMPLATE: version of the bundle under test (EXTENSION_NAME). The worked example uses
+  # "test-data", so this mirrors TC_TEST_DATA_VERSION; set it to your extension's version.
   TC_EXTENSION_VERSION: 5.0.0
   TC_ADMIN_UTILITY_VERSION: 5.0.0
   TC_TEST_DATA_VERSION: 5.0.0
   TC_POLARION_IMAGE_NAME: sbb.jfrog.io/polarion-docker/polarion/polarion:2606-0
-  # TEMPLATE: only needed for extensions that depend on the WeasyPrint service. Set
-  # TC_WEASYPRINT_SERVICE_IMAGE_NAME to bind a WeasyPrint container to the Polarion container
-  # (the worked example does not need it).
 jobs:
   system-tests:
     # Skip draft PRs (this container suite is expensive); still runs on manual workflow_dispatch.

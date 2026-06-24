@@ -37,9 +37,9 @@ This project uses dual CI:
   - `ci.yml` — linting, type checking, and SonarCloud analysis (static checks; no Polarion required).
   - `system-tests.yml` — system tests against a Polarion instance running in a Docker container. This
     is the pull request merge gate (the `system-tests` check is required on `main`), so merging does
-    not depend on the availability of a long-lived Polarion instance.
-- **Jenkins** (`Jenkinsfile`) — the same system tests run on a nightly schedule against a long-lived
-  Polarion instance behind a firewall, on the `main` branch only. Jenkins is not part of the
+    not depend on the availability of a persistent Polarion instance.
+- **Jenkins** (`Jenkinsfile`) — the same system tests run on a nightly schedule against a persistent
+  Polarion instance, on the `main` branch only. Jenkins is not part of the
   per-pull-request merge path.
 
 ## 1. Run tests against a prepared Polarion server (local or remote)
