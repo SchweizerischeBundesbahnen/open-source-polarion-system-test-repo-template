@@ -1,8 +1,9 @@
 # CLAUDE.md
 
 - **This is a repository template** for the system tests of Polarion Java extensions. Keep the
-  scaffolding minimal and generic — do not add real, extension-specific test logic. Placeholders are
-  marked with `TEMPLATE` and `myextension`; downstream repositories replace them.
+  scaffolding minimal and generic — do not add real, extension-specific test logic. The scaffold
+  uses the PDF Exporter extension as a worked example; the spots a downstream repository must change
+  are marked with `TEMPLATE`.
 - Use `uv` for all Python tooling (`uv run tox`, `uv run python tests/run.py`, `uv sync`) — never `pip`, `python -m pip`, or bare tool invocations.
 - GitHub Actions workflows from `SchweizerischeBundesbahnen/*` are intentionally pinned to `@main`, not hash-pinned. This is enforced by `zizmor.yml`. Do not change these to hash pins.
 - CI uses `uv sync --frozen` (not `--locked`). Do not change back to `--locked`.

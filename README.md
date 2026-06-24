@@ -19,7 +19,8 @@ test harness, plus the CI/CD wiring (GitHub Actions and Jenkins).
 ## Using this template
 
 1. Create a new repository from this template (e.g. `ch.sbb.polarion.extension.<name>.st`).
-2. Replace the placeholders (search for `TEMPLATE` and `myextension`):
+2. Replace the example values (the scaffold ships the PDF Exporter extension as a worked example;
+   search for `TEMPLATE` to find each spot):
    - `tests/constants.py` — set `EXTENSION_NAME` to your extension's bundle id.
    - `tests/run.py` — set the project id / name / template and the template location.
    - `pyproject.toml` — set `name` and `description`.

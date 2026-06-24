@@ -42,12 +42,13 @@ testcontainers_helper = TestContainersHelper()
 testcontainers_helper.create_test_container_if_required(EXTENSION_NAME)
 
 # TEMPLATE: a temporary Polarion project is created from the template under test-data and
-# torn down at the end of the run. Adjust the ids/name and the template folder to your project.
+# torn down at the end of the run. The ids/name and folder below are an example (the PDF
+# Exporter "E-Library" project); adjust them and add the matching export under test-data.
 example_project = TempProject(
-    "example",
-    "Example Project",
-    "example_st",
-    abs_path("../test-data/project-template/example_st"),
+    "elibrary",
+    "E-Library",
+    "pdf_exporter_elibrary_st",
+    abs_path("../test-data/project-template/pdf_exporter_elibrary_st"),
 )
 ExtensionTestCase.set_example_project(example_project)
 

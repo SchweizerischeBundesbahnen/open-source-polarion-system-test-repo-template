@@ -1,10 +1,10 @@
 [project]
-# TEMPLATE: rename to match your extension, e.g. "polarion-pdf-exporter-st".
-name = "polarion-extension-myextension-st"
+# TEMPLATE: "polarion-pdf-exporter-st" is an example; rename to match your extension.
+name = "polarion-pdf-exporter-st"
 # System-test repositories are not published, so the version is a static placeholder
 # (no release automation). It has no functional effect.
 version = "0.0.0"
-description = "System Tests for Polarion <my extension> extension"
+description = "System Tests for Polarion PDF Exporter extension"
 authors = [
     {name = "SBB Polarion Team", email = "polarion-opensource@sbb.ch"},
 ]

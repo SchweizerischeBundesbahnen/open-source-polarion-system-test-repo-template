@@ -511,7 +511,7 @@ wheels = [
 ]
 
 [[package]]
-name = "polarion-extension-myextension-st"
+name = "polarion-pdf-exporter-st"
 version = "0.0.0"
 source = { editable = "." }
 dependencies = [

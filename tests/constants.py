@@ -6,8 +6,9 @@ id, timeouts, thresholds, feature names, ...). Replace the placeholders below.
 
 # Bundle id of the extension under test, as registered in Polarion. This is the name used
 # in the REST base path /polarion/<EXTENSION_NAME>/rest and to build the extension API
-# client. Examples: "pdf-exporter", "docx-exporter", "xml-repair".
-EXTENSION_NAME: str = "myextension"
+# client. TEMPLATE: "pdf-exporter" is an example; replace it with your extension's bundle id
+# (e.g. "docx-exporter", "xml-repair").
+EXTENSION_NAME: str = "pdf-exporter"
 
 # Timeouts and polling for asynchronous Polarion jobs (tune per extension).
 EXPORT_TIMEOUT_SECONDS: int = 100
