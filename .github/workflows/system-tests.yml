@@ -2,8 +2,8 @@
 name: System Tests (Polarion in Docker)
 # Integration tests for pull requests: spin up Polarion in Docker (via the testcontainers
 # harness in tests/run.py) and run the system tests against pinned extension versions
-# (see env below). This is the merge gate, so PRs do not depend on the availability of the
-# long-lived Polarion SUT (which Jenkins exercises nightly instead).
+# (see env below). This is the merge gate, so PRs do not depend on the availability of a
+# persistent Polarion instance (which Jenkins exercises nightly instead).
 #
 # TEMPLATE: pin the versions/images for your extension below. TC_EXTENSION_VERSION is the
 # version of the extension under test that gets installed into the container.
