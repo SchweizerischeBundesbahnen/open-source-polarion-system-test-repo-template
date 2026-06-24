@@ -19,15 +19,15 @@ test harness, plus the CI/CD wiring (GitHub Actions and Jenkins).
 ## Using this template
 
 1. Create a new repository from this template (e.g. `ch.sbb.polarion.extension.<name>.st`).
-2. Replace the example values (the scaffold ships the PDF Exporter extension as a worked example;
-   search for `TEMPLATE` to find each spot):
+2. Replace the example values (the scaffold ships a minimal worked example that creates a temporary
+   `example` project, asserts it exists, and tears it down; search for `TEMPLATE` to find each spot):
    - `tests/constants.py` — set `EXTENSION_NAME` to your extension's bundle id.
    - `tests/run.py` — set the project id / name / template and the template location.
    - `pyproject.toml` — set `name` and `description`.
    - `sonar-project.properties` — set `sonar.projectKey`/badges to your repository.
    - `.github/workflows/system-tests.yml` — pin `TC_*` versions and images for your extension.
 3. Add your project template and baselines under `test-data/` (see `test-data/project-template/README.md`).
-4. Write `tests/test_*.py` modules subclassing `ExtensionTestCase` (`tests/test_version.py` is an example).
+4. Write `tests/test_*.py` modules subclassing `ExtensionTestCase` (`tests/test_example_project.py` is an example).
 
 ## CI
 

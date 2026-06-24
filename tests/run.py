@@ -16,8 +16,10 @@ Example:
 
         $ uv run python tests/run.py --tc_polarion_image_name polarion:<POLARION_VERSION>
 
-TEMPLATE: replace the placeholder extension name, project id/name/template and the
-template location below with the values for your extension. See test-data/project-template.
+TEMPLATE: the worked example below creates a temporary "example" project, the test asserts it
+exists, and the project is torn down at the end of the run. Replace the extension name
+(tests/constants.py) and the project id/name/template and template location below with the
+values for your extension. See test-data/project-template.
 """
 
 import sys
@@ -42,13 +44,13 @@ testcontainers_helper = TestContainersHelper()
 testcontainers_helper.create_test_container_if_required(EXTENSION_NAME)
 
 # TEMPLATE: a temporary Polarion project is created from the template under test-data and
-# torn down at the end of the run. The ids/name and folder below are an example (the PDF
-# Exporter "E-Library" project); adjust them and add the matching export under test-data.
+# torn down at the end of the run. The ids/name and folder below are an example ("example");
+# adjust them and add the matching export under test-data/project-template.
 example_project = TempProject(
-    "elibrary",
-    "E-Library",
-    "pdf_exporter_elibrary_st",
-    abs_path("../test-data/project-template/pdf_exporter_elibrary_st"),
+    "example",
+    "Example",
+    "example",
+    abs_path("../test-data/project-template/example"),
 )
 ExtensionTestCase.set_example_project(example_project)
 

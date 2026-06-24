@@ -16,9 +16,9 @@ This folder holds the static test data the system tests run against.
 
 1. Export the Polarion project you want to test against (the on-disk project layout: `.polarion/`,
    `modules/`, `_wiki/`, ...) into a folder under `project-template/`, e.g.
-   `project-template/example_st/`.
+   `project-template/example/` (the worked example ships exactly this).
 2. Point `tests/run.py` at that folder when constructing `TempProject` (the `template_location`
    argument), and set the project id / name / template id to match.
 
-The placeholder name `example_st` in `tests/run.py` is illustrative — replace it with a name that
+The placeholder name `example` in `tests/run.py` is illustrative — replace it with a name that
 reflects your extension and project.

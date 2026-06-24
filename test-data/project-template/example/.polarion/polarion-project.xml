@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project>
+    <field id="active">true</field>
+    <field id="description" text-type="text/plain">Minimal example project for the system-test repository template's worked example.</field>
+    <field id="name">Example</field>
+    <field id="trackerPrefix">EX</field>
+</project>
