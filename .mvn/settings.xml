@@ -15,9 +15,6 @@
                         <enabled>true</enabled>
                         <updatePolicy>never</updatePolicy>
                     </releases>
-                    <!-- Enabled so an extension under test published only as a -SNAPSHOT
-                         resolves from JFrog. Harmless for release-only repos: release
-                         resolution is unchanged. -->
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
