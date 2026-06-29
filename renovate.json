@@ -3,20 +3,20 @@
   "extends": [
     "github>SchweizerischeBundesbahnen/casc-renovate-preset-polarion-python"
   ],
-  "pinDigests": false,
   "customManagers": [
     {
       "customType": "regex",
-      "description": "TEMPLATE: track the version of the extension under test (EXTENSION_NAME) pinned in the system-tests workflow. The worked example uses test-data (GitHub releases); repoint depName/datasource/registry at your extension. If your extension publishes only -SNAPSHOT builds to JFrog, mirror the admin-utility manager below (maven + JFrog) and add ignoreUnstable: false in packageRules.",
+      "description": "EXAMPLE - extension under test. Replace depNameTemplate / datasourceTemplate / registryUrlTemplate with your extension; the pdf-exporter values here are only an example (GitHub Packages Maven, which also hosts SNAPSHOTs - see the matching ignoreUnstable packageRule below). Tracks the version pinned as TC_EXTENSION_VERSION in the system-tests workflow.",
       "managerFilePatterns": [
         "/(^|/)system-tests\\.yml$/"
       ],
       "matchStrings": [
         "TC_EXTENSION_VERSION:\\s*[\"']?(?<currentValue>\\d[^\"'\\s]+)"
       ],
-      "depNameTemplate": "SchweizerischeBundesbahnen/ch.sbb.polarion.extension.test-data",
-      "datasourceTemplate": "github-releases",
-      "extractVersionTemplate": "^v(?<version>.+)$"
+      "depNameTemplate": "ch.sbb.polarion.extensions:ch.sbb.polarion.extension.pdf-exporter",
+      "datasourceTemplate": "maven",
+      "registryUrlTemplate": "https://maven.pkg.github.com/SchweizerischeBundesbahnen/ch.sbb.polarion.extension.pdf-exporter",
+      "versioningTemplate": "maven"
     },
     {
       "customType": "regex",
@@ -60,7 +60,14 @@
   ],
   "packageRules": [
     {
-      "description": "Merge the system-test version bumps straight from the branch without opening a PR (includes majors). Scoped to system-tests.yml so the inherited preset's custom.regex manager (e.g. python-sbb-polarion in pyproject.toml) keeps its normal flow",
+      "description": "EXAMPLE - pairs with the extension-under-test manager above. If your extension publishes SNAPSHOTs to GitHub Packages Maven, keep this and set matchDepNames to your extension; otherwise remove it. The pdf-exporter depName here is only an example.",
+      "matchDepNames": [
+        "ch.sbb.polarion.extensions:ch.sbb.polarion.extension.pdf-exporter"
+      ],
+      "ignoreUnstable": false
+    },
+    {
+      "description": "Merge the system-test version bumps straight from the branch without opening a PR (includes majors and SNAPSHOTs). Scoped to system-tests.yml so the inherited preset's custom.regex manager (e.g. python-sbb-polarion in pyproject.toml) keeps its normal flow",
       "matchManagers": [
         "custom.regex"
       ],
