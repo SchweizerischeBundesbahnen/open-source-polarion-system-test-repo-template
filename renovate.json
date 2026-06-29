@@ -3,6 +3,7 @@
   "extends": [
     "github>SchweizerischeBundesbahnen/casc-renovate-preset-polarion-python"
   ],
+  "pinDigests": false,
   "customManagers": [
     {
       "customType": "regex",
@@ -15,7 +16,7 @@
       ],
       "depNameTemplate": "ch.sbb.polarion.extensions:ch.sbb.polarion.extension.pdf-exporter",
       "datasourceTemplate": "maven",
-      "registryUrlTemplate": "https://maven.pkg.github.com/SchweizerischeBundesbahnen/ch.sbb.polarion.extension.pdf-exporter",
+      "registryUrlTemplate": "https://sbb.jfrog.io/artifactory/polarion-mvn",
       "versioningTemplate": "maven"
     },
     {
