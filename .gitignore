@@ -179,3 +179,4 @@ junittest.xml
 # System-test runtime artifacts
 test-data/output/
 TEST-*.xml
+logs/
