@@ -39,7 +39,7 @@ build-backend = "hatchling.build"
 
 # Pin python-sbb-polarion to a GitHub release. TEMPLATE: bump the tag to the version you need.
 [tool.uv.sources]
-python-sbb-polarion = { git = "https://github.com/SchweizerischeBundesbahnen/python-sbb-polarion", tag = "v3.2.0" }
+python-sbb-polarion = { git = "https://github.com/SchweizerischeBundesbahnen/python-sbb-polarion", tag = "v3.3.0" }
 
 [tool.hatch.build.targets.wheel]
 packages = ["tests"]
