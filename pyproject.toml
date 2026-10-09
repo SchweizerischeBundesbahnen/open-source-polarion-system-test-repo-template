@@ -17,7 +17,7 @@ dependencies = [
     "unittest-xml-reporting>=4,<5",
     "ruff==0.15.21",
     "mypy==2.4.0",
-    "types-requests==2.33.0.20260906",
+    "types-requests==2.33.0.20261006",
     "tox>=4,<5",
     "testcontainers>=4.13.3",
 ]
