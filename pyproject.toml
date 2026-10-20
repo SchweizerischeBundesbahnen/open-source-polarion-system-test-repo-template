@@ -15,7 +15,7 @@ requires-python = ">=3.15,<3.16"
 dependencies = [
     "python-sbb-polarion",
     "unittest-xml-reporting>=4,<5",
-    "ruff==0.15.21",
+    "ruff==0.17.1",
     "mypy==2.4.0",
     "types-requests==2.33.0.20261006",
     "tox>=4,<5",
@@ -78,6 +78,12 @@ preview = true  # Get new rules early for better code quality
 
 # Ignore rules with clear justification
 ignore = [
+    # =========================================================================
+    # Ruff Selector Style (codes are kept; each one carries its name as a comment)
+    # =========================================================================
+    "rule-codes-in-selectors",  # rule-codes-in-selectors (preview, ruff >= 0.17)
+    "noqa-comments",            # noqa-comments (preview, ruff >= 0.17)
+
     # =========================================================================
     # Formatter Conflicts (REQUIRED - prevents conflicts with ruff format)
     # =========================================================================
