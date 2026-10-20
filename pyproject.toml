@@ -79,6 +79,12 @@ preview = true  # Get new rules early for better code quality
 # Ignore rules with clear justification
 ignore = [
     # =========================================================================
+    # Ruff Selector Style (codes are kept; each one carries its name as a comment)
+    # =========================================================================
+    "rule-codes-in-selectors",  # rule-codes-in-selectors (preview, ruff >= 0.17)
+    "noqa-comments",            # noqa-comments (preview, ruff >= 0.17)
+
+    # =========================================================================
     # Formatter Conflicts (REQUIRED - prevents conflicts with ruff format)
     # =========================================================================
     "W191",    # tab-indentation (formatter handles this)
