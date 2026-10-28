@@ -21,6 +21,7 @@ test harness, plus the CI/CD wiring (GitHub Actions and Jenkins).
 2. Replace the example values (the scaffold ships a minimal worked example that creates a temporary
    `example` project, asserts it exists, and tears it down; search for `TEMPLATE` to find each spot):
    - `tests/constants.py` — set `EXTENSION_NAME` to your extension's bundle id.
+   - `tests/extension_test_case.py` — parameterize `GenericTestCase[...]` with your extension's API class.
    - `tests/run.py` — set the project id / name / template and the template location.
    - `pyproject.toml` — set `name` and `description`.
    - `sonar-project.properties` — set `sonar.projectKey`/badges to your repository.
