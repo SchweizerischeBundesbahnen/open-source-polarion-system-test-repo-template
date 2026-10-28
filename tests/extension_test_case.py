@@ -2,22 +2,26 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from python_sbb_polarion.core.base import PolarionGenericExtensionApi
 from python_sbb_polarion.testing.generic_test_case import GenericTestCase
 
 from tests.constants import EXTENSION_NAME
 
 
 if TYPE_CHECKING:
-    from python_sbb_polarion.core.base import PolarionGenericExtensionApi
     from python_sbb_polarion.testing.temp_project import TempProject
 
 
-class ExtensionTestCase(GenericTestCase):
+class ExtensionTestCase(GenericTestCase[PolarionGenericExtensionApi]):
     """Base test case for the extension system tests.
 
     Provides the extension API client and a shared temporary Polarion project that the
     individual test modules build on. Put extension-specific helper methods here (settings
     initialization, conversion helpers, assertions, ...).
+
+    TEMPLATE: replace ``PolarionGenericExtensionApi`` in ``GenericTestCase[...]`` with the API
+    class of your extension (e.g. ``PolarionDiffToolApi``). ``extension_api`` and ``api()`` are then
+    typed with it, so do not redeclare the attribute or override ``api()``.
 
     TEMPLATE: this base is intentionally minimal. As your suite grows, add helpers here so
     the individual ``test_*.py`` modules stay focused on the behaviour under test.
@@ -37,6 +41,3 @@ class ExtensionTestCase(GenericTestCase):
     def setUp(self) -> None:
         self.project_id: str = self.__class__.example_project.temp_project_id
         self.scope: str = f"project/{self.project_id}/"
-
-    def api(self) -> PolarionGenericExtensionApi:
-        return self.extension_api
