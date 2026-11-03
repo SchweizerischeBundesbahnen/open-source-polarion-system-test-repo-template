@@ -408,7 +408,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "python-sbb-polarion", git = "https://github.com/SchweizerischeBundesbahnen/python-sbb-polarion?tag=v5.0.0" },
+    { name = "python-sbb-polarion", git = "https://github.com/SchweizerischeBundesbahnen/python-sbb-polarion?tag=v5.1.0" },
     { name = "ruff", specifier = "==0.17.3" },
     { name = "testcontainers", specifier = ">=4.13.3" },
     { name = "tox", specifier = ">=4,<5" },
@@ -531,8 +531,8 @@ wheels = [
 
 [[package]]
 name = "python-sbb-polarion"
-version = "5.0.0"
-source = { git = "https://github.com/SchweizerischeBundesbahnen/python-sbb-polarion?tag=v5.0.0#a4c9c05840e6410ead07018877b76770f78cd25f" }
+version = "5.1.0"
+source = { git = "https://github.com/SchweizerischeBundesbahnen/python-sbb-polarion?tag=v5.1.0#962a6248dff4426d15e736354769f209b4bc08af" }
 dependencies = [
     { name = "docker" },
     { name = "ldap3" },
