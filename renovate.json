@@ -7,7 +7,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "EXAMPLE - extension under test, pinned as TC_EXTENSION_VERSION in the system-tests workflow. The worked example tests test-data (EXTENSION_NAME), so this tracks the test-data releases, like TC_TEST_DATA_VERSION below. Tracking another extension here makes the workflow download test-data at that extension's version, which does not exist. Replace depNameTemplate with your extension. To pick up SNAPSHOTs from the JFrog Maven repository, use datasource maven with registryUrl https://sbb.jfrog.io/artifactory/polarion-mvn and add a packageRule with ignoreUnstable false for it.",
+      "description": "EXAMPLE - Track the test-data extension version pinned as TC_EXTENSION_VERSION in the system-tests workflow (GitHub releases). Replace it with your extension under test",
       "managerFilePatterns": [
         "/(^|/)system-tests\\.yml$/"
       ],
